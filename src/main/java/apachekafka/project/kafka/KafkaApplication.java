@@ -20,11 +20,10 @@ public class KafkaApplication {
 		return args -> {
 //			kafkaTemplate.send("Dmessage", "Hello -- this is the Message");
 
-			for(int i = 0; i < 20000; i++){
+			for(int i = 0; i < 30000; i++){
 				kafkaTemplate.send("Dmessage", "Hello -- this is the Message" + i);
 			}
 		};
-
 
 	}
 }
