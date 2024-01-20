@@ -18,12 +18,10 @@ public class KafkaApplication {
 	CommandLineRunner commandLineRunner(KafkaTemplate<String, String> kafkaTemplate){
 
 		return args -> {
-//			kafkaTemplate.send("Dmessage", "Hello -- this is the Message");
-
+//			kafkaTemplate.send("Dmessage", "Hello ---- this is the Message");
 			for(int i = 0; i < 30000; i++){
 				kafkaTemplate.send("Dmessage", "Hello -- this is the Message" + i);
 			}
 		};
-
 	}
 }
