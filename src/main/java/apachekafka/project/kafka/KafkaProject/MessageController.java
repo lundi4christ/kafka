@@ -16,8 +16,17 @@ public class MessageController {
         this.kafkaTemplate=kafkaTemplate;
     }
 
-    @PostMapping
-    public void publish(@RequestBody MessageRequest messageRequest){
-        kafkaTemplate.send("Dmessage", messageRequest.message);
+    @PostMapping("/send1")
+    public void publish1(@RequestBody Object message){
+        MessageRequest msg = new MessageRequest();
+        msg.setMessage((String) message);
+        String getmsg = msg.getMessage();
+        System.out.println(msg.getMessage());
+        kafkaTemplate.send("Dmessage", getmsg);
+    }
+
+    @PostMapping("/send")
+    public void publish(@RequestBody String messageRequest){
+        kafkaTemplate.send("Dmessage", messageRequest);
     }
 }
