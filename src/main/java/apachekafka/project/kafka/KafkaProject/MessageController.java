@@ -1,5 +1,8 @@
 package apachekafka.project.kafka.KafkaProject;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,11 +20,13 @@ public class MessageController {
     }
 
     @PostMapping("/send1")
-    public void publish1(@RequestBody Object message){
+    public void publish1(@RequestBody String message) throws JSONException {
+
+        JSONObject jsonObject = new JSONObject(message);
         MessageRequest msg = new MessageRequest();
         msg.setMessage((String) message);
-        String getmsg = msg.getMessage();
-        System.out.println(msg.getMessage());
+        String getmsg = jsonObject.getString("message");
+        System.out.println("payload from API- " + getmsg);
         kafkaTemplate.send("Dmessage", getmsg);
     }
 
