@@ -23,8 +23,8 @@ public class MessageController {
     public void publish1(@RequestBody String message) throws JSONException {
 
         JSONObject jsonObject = new JSONObject(message);
-        MessageRequest msg = new MessageRequest();
-        msg.setMessage((String) message);
+ /*       MessageRequest msg = new MessageRequest();
+        msg.setMessage((String) message);*/
         String getmsg = jsonObject.getString("message");
         System.out.println("payload from API- " + getmsg);
         kafkaTemplate.send("Dmessage", getmsg);
